@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 class App {
-    private List<WiseSaying> wiseSayingList = new ArrayList<WiseSaying>();
+    private final List<WiseSaying> wiseSayingList = new ArrayList<>();
 
     public void run() {
         System.out.println("== 명언 앱 ==");
 
         Scanner scanner = new Scanner(System.in);
-
         int id = 1;
 
         while (true) {
@@ -30,7 +29,7 @@ class App {
                 WiseSaying wiseSaying = new WiseSaying(id, content, author);
                 wiseSayingList.add(wiseSaying);
 
-                System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
+                System.out.printf("%d번 명언이 등록되었습니다.\n".formatted(id));
                 id++;
             }
             else if (cmd.equals("목록")) {
@@ -39,6 +38,24 @@ class App {
                 for (int i = wiseSayingList.size() - 1; i >= 0; i--) {
                     WiseSaying ws = wiseSayingList.get(i);
                     System.out.println(ws.getId() + " / " + ws.getSay() + " / " + ws.getAuthor());
+                }
+            }
+            else if (cmd.startsWith("삭제")) {
+                int deleteId = Integer.parseInt(cmd.split("=")[1]);
+                WiseSaying target = null;
+                for (WiseSaying ws : wiseSayingList) {
+                    if (ws.getId() == deleteId) {
+                        target = ws;
+                        break;
+                    }
+                }
+
+                if (target != null) {
+                    wiseSayingList.remove(target);
+                    System.out.println(deleteId + "번 명언이 삭제되었습니다.");
+                }
+                else {
+                    System.out.println(deleteId + "번 명언은 존재하지 않습니다.");
                 }
             }
         }
