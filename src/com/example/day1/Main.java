@@ -1,8 +1,11 @@
 package com.example.day1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 class App {
+    private List<WiseSaying> wiseSayingList = new ArrayList<WiseSaying>();
 
     public void run() {
         System.out.println("== 명언 앱 ==");
@@ -24,10 +27,20 @@ class App {
                 System.out.print("작가 : ");
                 String author = scanner.nextLine();
 
+                WiseSaying wiseSaying = new WiseSaying(id, content, author);
+                wiseSayingList.add(wiseSaying);
+
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
                 id++;
             }
-            System.out.printf("입력된 명령어 : %s\n".formatted(cmd));
+            else if (cmd.equals("목록")) {
+                System.out.println("번호 / 작가 / 명언");
+                System.out.println("---------------");
+                for (int i = wiseSayingList.size() - 1; i >= 0; i--) {
+                    WiseSaying ws = wiseSayingList.get(i);
+                    System.out.println(ws.getId() + " / " + ws.getSay() + " / " + ws.getAuthor());
+                }
+            }
         }
         scanner.close();
     }
