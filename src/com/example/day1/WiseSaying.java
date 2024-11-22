@@ -14,10 +14,20 @@ public class WiseSaying {
     public int getId() {
         return id;
     }
+
     public String getSay() {
         return say;
     }
+
     public String getAuthor() {
         return author;
+    }
+
+    public void setSay(String say) {
+        this.say = say;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
