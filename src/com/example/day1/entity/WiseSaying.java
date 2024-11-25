@@ -1,7 +1,7 @@
-package com.example.day1;
+package com.example.day1.entity;
 
 public class WiseSaying {
-    private int id;
+    private final int id;
     private String say;
     private String author;
 
