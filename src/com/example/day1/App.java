@@ -14,6 +14,8 @@ public class App {
     }
 
     public void run() {
+        wiseSayingController.sampleData();
+
         System.out.println("== 명언 앱 ==");
 
         while (true) {

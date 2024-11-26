@@ -1,7 +1,7 @@
 package com.example.day1.entity;
 
 public class WiseSaying {
-    private final int id;
+    private int id;
     private String say;
     private String author;
 
@@ -29,5 +29,9 @@ public class WiseSaying {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

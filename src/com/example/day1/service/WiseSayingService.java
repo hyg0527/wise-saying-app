@@ -1,44 +1,41 @@
 package com.example.day1.service;
 
 import com.example.day1.entity.WiseSaying;
+import com.example.day1.repository.WiseSayingRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class WiseSayingService {
-    private final List<WiseSaying> wiseSayingList;
-    private int lastId;
+    private final WiseSayingRepository wiseSayingRepository;
 
     public WiseSayingService() {
-        this.wiseSayingList = new ArrayList<WiseSaying>();
-        this.lastId = 0;
+        this.wiseSayingRepository = new WiseSayingRepository();
     }
 
-    public WiseSaying addWiseSaying(String content, String author) {
-        int id = ++lastId;
-        WiseSaying ws = new WiseSaying(id, content, author);
-        wiseSayingList.add(ws);
+    public WiseSaying add(String content, String author) {
+        WiseSaying ws = new WiseSaying(0, content, author);
+        wiseSayingRepository.add(ws);
 
         return ws;
     }
 
     public List<WiseSaying> getWiseSayingList() {
-        return wiseSayingList;
+        return wiseSayingRepository.findAll();
     }
 
     public boolean removeById(int id) {
-        return wiseSayingList.removeIf(ws -> ws.getId() == id);
+        return wiseSayingRepository.removeById(id);
     }
 
     public Optional<WiseSaying> findById(int id) {
-        return wiseSayingList.stream()
-                .filter(e -> e.getId() == id)
-                .findFirst();
+        return wiseSayingRepository.findById(id);
     }
 
-    public void modify(WiseSaying foundWiseSaying, String content, String author) {
-        foundWiseSaying.setSay(content);
-        foundWiseSaying.setAuthor(author);
+    public void modify(WiseSaying wiseSaying, String content, String author) {
+        wiseSaying.setSay(content);
+        wiseSaying.setAuthor(author);
+
+        wiseSayingRepository.modify(wiseSaying);
     }
 }
