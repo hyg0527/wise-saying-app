@@ -3,7 +3,6 @@ package com.example.day1.controller;
 import com.example.day1.entity.WiseSaying;
 import com.example.day1.service.WiseSayingService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -12,9 +11,9 @@ public class WiseSayingController {
     private final WiseSayingService wiseSayingService;
     private final Scanner scanner;
 
-    public WiseSayingController() {
+    public WiseSayingController(Scanner scanner) {
         this.wiseSayingService = new WiseSayingService();
-        this.scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     public void sampleData() {
@@ -62,26 +61,23 @@ public class WiseSayingController {
 
         Optional<WiseSaying> opWiseSaying = wiseSayingService.findById(modifyId);
 
-        WiseSaying foundWiseSaying = opWiseSaying.get();
-
         if (opWiseSaying.isEmpty()) {
             System.out.println(modifyId + "번 명언은 존재하지 않습니다.");
             return;
         }
-        else {
-            System.out.printf("명언(기존) : %s\n", foundWiseSaying.getSay());
-            System.out.print("명언 : ");
-            String content = scanner.nextLine();
 
-            System.out.printf("작가(기존) : %s\n", foundWiseSaying.getAuthor());
-            System.out.print("작가 : ");
-            String author = scanner.nextLine();
+        WiseSaying foundWiseSaying = opWiseSaying.get();
 
-            wiseSayingService.modify(foundWiseSaying, content, author);
+        System.out.printf("명언(기존) : %s\n", foundWiseSaying.getSay());
+        System.out.print("명언 : ");
+        String content = scanner.nextLine();
 
-            System.out.printf("%d번 명언이 수정되었습니다.\n", modifyId);
-        }
+        System.out.printf("작가(기존) : %s\n", foundWiseSaying.getAuthor());
+        System.out.print("작가 : ");
+        String author = scanner.nextLine();
 
-        scanner.close();
+        wiseSayingService.modify(foundWiseSaying, content, author);
+
+        System.out.println(modifyId + "번 명언이 수정되었습니다.");
     }
 }

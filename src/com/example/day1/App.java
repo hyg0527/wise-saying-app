@@ -10,7 +10,7 @@ public class App {
 
     public App() {
         this.scanner = new Scanner(System.in);
-        this.wiseSayingController = new WiseSayingController();
+        this.wiseSayingController = new WiseSayingController(scanner);
     }
 
     public void run() {

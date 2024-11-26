@@ -1,6 +1,7 @@
 package com.example.day1.service;
 
 import com.example.day1.entity.WiseSaying;
+import com.example.day1.repository.WiseSayingMemoryRepository;
 import com.example.day1.repository.WiseSayingRepository;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class WiseSayingService {
     private final WiseSayingRepository wiseSayingRepository;
 
     public WiseSayingService() {
-        this.wiseSayingRepository = new WiseSayingRepository();
+        this.wiseSayingRepository = new WiseSayingMemoryRepository();
     }
 
     public WiseSaying add(String content, String author) {
